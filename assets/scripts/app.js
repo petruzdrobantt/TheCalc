@@ -12,6 +12,31 @@ function createAndWriteLog(operator, resultBefore, calculationNumber){
     outputResult(result, calcDescription);
 }
 
+function calculateResult(calculationType){
+    const enteredNumber = getUserInput();
+    initialResult = result;
+    let mathOperator;
+    if(calculationType === 'ADD'){
+        result += +enteredNumber;
+        mathOperator = '+';
+    }
+    else if(calculationType === 'SUB'){
+        result -= +enteredNumber;
+        mathOperator = '-';
+    }
+    else if(calculationType === 'MUL'){
+        result *= +enteredNumber;
+        mathOperator = '*';
+    }
+    else if(calculationType === 'SUB'){
+        result /= +enteredNumber;
+        mathOperator = '/';
+    }
+
+    createAndWriteLog(mathOperator, initialResult, enteredNumber);
+    writeToLog(calculationType, initialResult, enteredNumber, result);
+}
+
 function writeToLog(operation, initialResult, enteredNumber, result){
     const logEntry = {
         operation : operation,
@@ -23,35 +48,19 @@ function writeToLog(operation, initialResult, enteredNumber, result){
 }
 
 function add(){
-    const enteredNumber = getUserInput();
-    initialResult = result;
-    result += +enteredNumber;
-    createAndWriteLog('+', initialResult, enteredNumber);
-    writeToLog("ADD", initialResult, enteredNumber, result);
+    calculateResult('ADD');
 }
 
 function subtract(){
-    const enteredNumber = getUserInput();
-    initialResult = result;
-    result -= +enteredNumber;
-    createAndWriteLog('-', initialResult, enteredNumber);
-    writeToLog("SUB", initialResult, enteredNumber, result);
+    calculateResult('SUB');
 }
 
 function multiply(){
-    const enteredNumber = getUserInput();
-    initialResult = result;
-    result *= +enteredNumber;
-    createAndWriteLog('*', initialResult, enteredNumber);
-    writeToLog("MUL", initialResult, enteredNumber, result);
+    calculateResult('MUL');
 }
 
 function divide(){
-    const enteredNumber = getUserInput();
-    initialResult = result;
-    result /= +enteredNumber;
-    createAndWriteLog('/', initialResult, enteredNumber);
-    writeToLog("DIV", initialResult, enteredNumber, result);
+    calculateResult('DIV');
 }
 
 addBtn.addEventListener('click', add);
